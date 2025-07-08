@@ -33,5 +33,6 @@ services:
       DATABASE_URL: postgresql+asyncpg://fastapi:fastapi@db:5432/fastapidb
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     depends_on:
-      - db
       - kafka
+      - db
+      

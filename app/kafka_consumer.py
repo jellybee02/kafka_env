@@ -5,7 +5,7 @@ from app.db import SessionLocal
 from app.models import Order
 
 consumer = Consumer({
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': 'kafka:9092',  # 도커 바깥에서 실행할 때만
     'group.id': 'order-consumers',
     'auto.offset.reset': 'earliest'
 })
@@ -19,7 +19,7 @@ async def consume():
         if msg is None or msg.error():
             await asyncio.sleep(1)
             continue
-        data = json.loads(msg.value().decode("utf-8"))
+        data = json.loads(msg.value().decode('utf-8'))
 
         async with SessionLocal() as session:
             order = Order(**data)
